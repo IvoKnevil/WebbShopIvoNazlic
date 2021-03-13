@@ -4,7 +4,9 @@ namespace WebbShopIvoNazlic.Models
 {
     internal class Book
     {
-
+        /// <summary>
+        /// Class for books in table Books
+        /// </summary>
         [Key]
 
         public int ID { get; set; }
