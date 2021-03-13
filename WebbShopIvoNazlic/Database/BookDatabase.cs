@@ -9,10 +9,15 @@ namespace WebbShopIvoNazlic.Database
 
         public DbSet<Book> Books { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
+       public DbSet<Category> BookCategories { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer
-                ($@"Server = .\SQLEXPRESS;Database={Database};trusted_connection=true");
+                ($@"Server = .\SQLEXPRESS;Database={DatabaseName};trusted_connection=true");
             
         }
 

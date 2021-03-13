@@ -1,15 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebbShopIvoNazlic.Models
 {
     internal class Book
     {
+
         /// <summary>
         /// Class for books in table Books
         /// </summary>
         [Key]
 
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string Title { get; set; }
 
@@ -19,11 +21,13 @@ namespace WebbShopIvoNazlic.Models
 
         public int Amount { get; set; }
 
-        public int CategoryID { get; set; }
+        [ForeignKey ("CategoryId")]
+        public Category BookCategory { get; set; }
+
 
         public override string ToString()
         {
-            return $"Book: {Title}({ID}), by {Author}. Price: {Price}, Amount: {Amount}";
+            return $"Book: {Title}({Id}), by {Author}. Price: {Price}, Amount: {Amount}";
         }
     }
 }
