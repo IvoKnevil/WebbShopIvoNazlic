@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebbShopIvoNazlic.Models
 {
-    internal class User
+    public class User
     {
 
         [Key]

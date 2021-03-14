@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebbShopIvoNazlic.Models
 {
-    internal class Book
+    public class Book
     {
 
         /// <summary>

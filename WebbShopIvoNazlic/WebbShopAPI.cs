@@ -96,7 +96,6 @@ namespace WebbShopIvoNazlic
             return 0;
         }
 
-
         public static void Logout(int id)
         {
             var user = db.Users.FirstOrDefault(u => u.Id == id && u.SessionTimer > DateTime.Now.AddMinutes(-15));
@@ -109,7 +108,80 @@ namespace WebbShopIvoNazlic
 
         }
 
+        public static List<Category> GetCategories()
+        {
+            return db.BookCategories.ToList();
+        }
 
+        public static List<Category> GetCategories(string keyword)
+        {
+            List<Category> listOfCategories = new List<Category>();
 
+            foreach (var category in db.BookCategories.Where(n => n.Name.ToLower().Contains(keyword.ToLower())))
+            {
+                if (category != null)
+                {
+                    listOfCategories.Add(category);
+                }
+            }
+
+            return listOfCategories;
+        }
+
+        public static List<Book> GetCategory(int id)
+        {
+            List<Book> booksOfCategory = new List<Book>();
+
+            foreach (var book in db.Books.Where(bc => bc.BookCategory.Id == id))
+            {
+                if (book != null)
+                {
+                    booksOfCategory.Add(book);
+                }
+            }
+
+            return booksOfCategory;
+        }
+
+        public static List<Book> GetAvailableBooks(int id)
+        {
+            List<Book> availableBooks = new List<Book>();
+
+            foreach (var book in db.Books.Where(b => b.Amount > 0 && b.BookCategory.Id == id))
+            {
+                if (book != null)
+                {
+                    availableBooks.Add(book);
+                }
+            }
+            return availableBooks;
+        }
+
+        public static Book GetBook(int id)
+        {
+            var book = (db.Books.FirstOrDefault(b => b.Id == id));
+
+            if (book != null)
+            {
+                return book;
+            }
+            return book;
+
+        }
+
+        public static List<Book> GetBooks(string keyword)
+        {
+            List<Book> matchingBooks = new List<Book>();
+
+            foreach (var book in db.Books.Where(n => n.Title.ToLower().Contains(keyword.ToLower())))
+            {
+                if (book != null)
+                {
+                    matchingBooks.Add(book);
+                }
+            }
+
+            return matchingBooks;
+        }
     }
 }

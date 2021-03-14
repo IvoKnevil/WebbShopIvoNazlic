@@ -2,7 +2,7 @@
 
 namespace WebbShopIvoNazlic.Models
 {
-    internal class Category
+    public class Category
     {
 
         /// <summary>
@@ -15,5 +15,9 @@ namespace WebbShopIvoNazlic.Models
 
         public string Name { get; set; }
 
+        public override string ToString()
+        {
+            return $"Category: {Name} (id: {Id})";
+        }
     }
 }
