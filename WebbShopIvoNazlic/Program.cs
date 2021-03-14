@@ -11,41 +11,20 @@ namespace WebbShopIvoNazlic
         static void Main(string[] args)
         {
 
+            Console.WriteLine(WebbShopAPI.Login("Ivo", "Test"));
+            Console.WriteLine(WebbShopAPI.Login("Administrator", "CodicRulez"));
 
-            AddMockData();
+            WebbShopAPI.Logout(1);
+
+            //AddMockData();
+            //WebbShopAPI WebShop = new WebbShopAPI();
+
+            //AddBook("Ivos Book", "Moi", 1500, 1, category(Horror));
             //SortByName();
             //ChangePrice();
             //RemoveBook();
 
         }
-
-
-
-        private static void AddBook(string title, string author, int amount, int price, params Category[] categories)
-        {
-
-            using (var db = new BookDatabase())
-            {
-                var book = db.Books.FirstOrDefault(b => b.Title == title);
-                if (book == null)
-                {
-                    book = db.Books.FirstOrDefault(b => b.Author == author);
-                }
-                if (book == null)
-                {
-
-                    book = new Book { Title = title, Author = author, Amount = amount, Price = price, };
-
-                }
-
-
-            }
-
-        }
-
-
-
-
 
 
 
@@ -56,9 +35,8 @@ namespace WebbShopIvoNazlic
                 //Add data for users
                 if (db.Users.Count() == 0)
                 {
-                    db.Users.Add(new User { Name = "Administrator", Password = "CodicRulez" });
+                    db.Users.Add(new User { Name = "Administrator", Password = "CodicRulez", IsAdmin = true });
                     db.Users.Add(new User { Name = "TestCustomer", Password = "Codic2021" });
-
                 }
 
                 //Add data for book categories
@@ -112,55 +90,6 @@ namespace WebbShopIvoNazlic
                 }
 
                 db.SaveChanges();
-            }
-
-        }
-
-        private static void ChangePrice()
-        {
-
-            using (var db = new BookDatabase())
-            {
-                var cabal = db.Books.FirstOrDefault(b => b.Title == "Cabal (Nightbreed)");
-
-                if (cabal != null)
-
-                {
-                    cabal.Price = 300;
-                }
-
-                db.Update(cabal);
-                db.SaveChanges();
-
-            }
-        }
-
-        private static void RemoveBook()
-        {
-
-            using (var db = new BookDatabase())
-            {
-                var cabal = db.Books.FirstOrDefault(b => b.Title == "Cabal (Nightbreed)");
-
-                if (cabal != null)
-
-                {
-                    db.Books.Remove(cabal);
-                }
-
-                db.SaveChanges();
-
-            }
-        }
-
-        private static void SortByName()
-        {
-            using (var db = new BookDatabase())
-            {
-                foreach (var book in db.Books.OrderBy(b => b.Title))
-                {
-                    Console.WriteLine(book);
-                }
             }
 
         }

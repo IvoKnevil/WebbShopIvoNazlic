@@ -2,12 +2,13 @@
 
 namespace WebbShopIvoNazlic.Models
 {
-    class Category
+    internal class Category
     {
 
         /// <summary>
         /// Class for book categories table
         /// </summary>
+        /// 
         [Key]
 
         public int Id { get; set; }
