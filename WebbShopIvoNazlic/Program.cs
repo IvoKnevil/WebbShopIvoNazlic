@@ -22,7 +22,26 @@ namespace WebbShopIvoNazlic
             ///2. Login with test user
             ///-------------------------------------------
             ///
-            ///  WebbShopAPI.Login("TestCustomer", "TestCustomer");
+            /// WebbShopAPI.Login("TestCustomer", "Codic2021");
+            ///
+            ///--------------------------------------------
+
+
+            /// Logout with test user (Enter test users id)
+            ///-------------------------------------------
+            ///
+            /// WebbShopAPI.Logout();
+            ///
+            ///--------------------------------------------
+
+
+            /// List all categories
+            ///-------------------------------------------
+            ///
+            /// foreach (var item in WebbShopAPI.GetCategories())
+            /// {
+            /// Console.WriteLine(item);
+            /// }
             ///
             ///--------------------------------------------
 
@@ -38,22 +57,10 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-            /// List all categories
+            ///4. List all books in category (by id) - (Enter chosen category id))
             ///-------------------------------------------
             ///
-            /// foreach (var item in WebbShopAPI.GetCategories())
-            /// {
-            /// Console.WriteLine(item);
-            /// }
-            ///
-            ///--------------------------------------------
-            ///
-
-
-            ///4. List all books in category (by ID) - (id 1 = horror)
-            ///-------------------------------------------
-            ///
-            /// foreach (var item in WebbShopAPI.GetCategory(1))
+            /// foreach (var item in WebbShopAPI.GetCategory())
             /// {
             /// Console.WriteLine(item);
             /// }
@@ -61,15 +68,15 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-            ///5. Show detalis for book Dr Sleep (id 2)
+            ///5. Show detalis for book (Enter chosen book id)
             ///-------------------------------------------
             ///
-            /// Console.WriteLine(WebbShopAPI.GetBook(2));
+            /// Console.WriteLine(WebbShopAPI.GetBook());
             ///
             ///--------------------------------------------
 
 
-            /// List all boos matching keyword "ee"
+            /// List all books matching keyword "ee"
             ///-------------------------------------------
             ///
             /// foreach (var item in WebbShopAPI.GetBooks("ee"))
@@ -80,13 +87,35 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-            ///6. List all available books (by ID) - (id 1 = horror)
+            /// List all books by author (i e Stephen King)
             ///-------------------------------------------
             ///
-            /// foreach (var item in WebbShopAPI.GetAvailableBooks(1))
+            /// foreach (var item in WebbShopAPI.GetAuthors("king"))
             /// {
             /// Console.WriteLine(item);
             /// }
+            ///
+            ///--------------------------------------------
+
+
+            ///6. List all available books of certain category (by id) - (enter chosen category id)
+            ///-------------------------------------------
+            ///
+            /// foreach (var item in WebbShopAPI.GetAvailableBooks())
+            /// {
+            /// Console.WriteLine(item);
+            /// }
+            ///
+            ///--------------------------------------------
+
+
+            ///7. Buy Book (send parameters userId and bookId)
+            ///-------------------------------------------
+            ///
+            /// 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.BuyBook(2, 1));
+            /// 
             ///
             ///--------------------------------------------
 

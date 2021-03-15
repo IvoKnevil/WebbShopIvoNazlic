@@ -5,7 +5,10 @@ namespace WebbShopIvoNazlic.Models
 {
     public class User
     {
-
+        /// <summary>
+        /// Class for users table
+        /// </summary>
+        
         [Key]
 
         public int Id { get; set; }
@@ -21,9 +24,6 @@ namespace WebbShopIvoNazlic.Models
         public bool IsActive { get; set; } = true;
 
         public bool IsAdmin { get; set; } = false;
-
-    
-
 
     }
 }

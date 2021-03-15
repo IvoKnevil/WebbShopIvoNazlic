@@ -13,6 +13,8 @@ namespace WebbShopIvoNazlic.Database
 
        public DbSet<Category> BookCategories { get; set; }
 
+       public DbSet<SoldBook> SoldBooks { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -96,9 +97,9 @@ namespace WebbShopIvoNazlic
             return 0;
         }
 
-        public static void Logout(int id)
+        public static void Logout(int userId)
         {
-            var user = db.Users.FirstOrDefault(u => u.Id == id && u.SessionTimer > DateTime.Now.AddMinutes(-15));
+            var user = db.Users.FirstOrDefault(u => u.Id == userId && u.SessionTimer > DateTime.Now.AddMinutes(-15));
             if (user != null)
             {
                 user.SessionTimer = DateTime.MinValue;
@@ -183,5 +184,51 @@ namespace WebbShopIvoNazlic
 
             return matchingBooks;
         }
+
+        public static List<Book> GetAuthors(string keyword)
+        {
+            List<Book> booksByAuthor = new List<Book>();
+
+            foreach (var book in db.Books.Where(n => n.Author.ToLower().Contains(keyword.ToLower())))
+            {
+                if (book != null)
+                {
+                    booksByAuthor.Add(book);
+                }
+            }
+
+            return booksByAuthor;
+        }
+
+        public static bool BuyBook(int userId, int bookId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == userId);
+            var book = db.Books.Include(b => b.BookCategory).FirstOrDefault(b => b.Id == bookId);
+
+            if (user != null && user.SessionTimer > DateTime.Now.AddMinutes(-15) && user.IsActive)
+            {
+                if (book.Amount > 0)
+                {
+                    book.Amount -= 1;
+                    db.Books.Update(book);
+                    db.SoldBooks.Add(new SoldBook
+                    {
+                        Title = book.Title,
+                        Author = book.Author,
+                        CategoryId = book.BookCategory.Name,
+                        Price = book.Price,
+                        PurchasedDate = DateTime.Now,
+                        Users = user
+                    });
+
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
     }
 }

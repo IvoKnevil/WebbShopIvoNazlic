@@ -10,7 +10,7 @@ using WebbShopIvoNazlic.Database;
 namespace WebbShopIvoNazlic.Migrations
 {
     [DbContext(typeof(BookDatabase))]
-    [Migration("20210314123608_initialiseDb")]
+    [Migration("20210314213621_initialiseDb")]
     partial class initialiseDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,6 +65,38 @@ namespace WebbShopIvoNazlic.Migrations
                     b.ToTable("BookCategories");
                 });
 
+            modelBuilder.Entity("WebbShopIvoNazlic.Models.SoldBook", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PurchasedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SoldBooks");
+                });
+
             modelBuilder.Entity("WebbShopIvoNazlic.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -102,6 +134,15 @@ namespace WebbShopIvoNazlic.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("BookCategory");
+                });
+
+            modelBuilder.Entity("WebbShopIvoNazlic.Models.SoldBook", b =>
+                {
+                    b.HasOne("WebbShopIvoNazlic.Models.User", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

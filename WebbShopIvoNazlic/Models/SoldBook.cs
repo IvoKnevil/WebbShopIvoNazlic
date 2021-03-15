@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebbShopIvoNazlic.Models
 {
-    public class Book
+    public class SoldBook
     {
         /// <summary>
-        /// Class for books in table Books
+        /// Class for sold books table
         /// </summary>
         
         [Key]
@@ -17,16 +18,18 @@ namespace WebbShopIvoNazlic.Models
 
         public string Author { get; set; }
 
+        public string CategoryId { get; set; }
+
         public int Price { get; set; }
 
-        public int Amount { get; set; }
+        public DateTime PurchasedDate { get; set; }
 
-        [ForeignKey ("CategoryId")]
-        public Category BookCategory { get; set; }
+        [ForeignKey("UserId")]
+        public User Users { get; set; }
 
         public override string ToString()
         {
-            return $"Book: {Title}({Id}), by {Author}. Price: {Price}, Amount: {Amount}";
+            return $"Sold book: {Title}({Id}), by {Author}. Price: {Price}, Category: {CategoryId}";
         }
 
     }
