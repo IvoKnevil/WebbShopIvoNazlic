@@ -111,13 +111,39 @@ namespace WebbShopIvoNazlic
 
             ///7. Buy Book (send parameters userId and bookId)
             ///-------------------------------------------
-            ///
             /// 
-            /// 
-            /// Console.WriteLine(WebbShopAPI.BuyBook(2, 1));
-            /// 
+            /// Console.WriteLine(WebbShopAPI.BuyBook(2, 1)); 
             ///
             ///--------------------------------------------
+
+            /// Ping - check if user is online (send parameter userId)
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.Ping());
+            /// 
+            ///--------------------------------------------           
+
+            /// Register - create new user (send parameters name & password as strings)
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.Register("", ""));
+            /// 
+            ///--------------------------------------------    
+
+            /// Add Book - add a book to database(send all the parameters)
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.AddBook(1, "Pride and Prejudice", "Jane Austen" , 350, 10));
+            /// 
+            ///--------------------------------------------  
+
+            /// Set Amount of available books (send parameters userDd and bookId)
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.SetAmount(1, 2));
+            /// 
+            ///--------------------------------------------  
+
 
 
             ///14. Login with Admin user

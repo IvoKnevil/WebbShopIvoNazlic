@@ -14,25 +14,6 @@ namespace WebbShopIvoNazlic
 
         private static BookDatabase db = new BookDatabase();
 
-
-        /* public static void AddBook(string title, string author, int amount, int price, Category [] category)
-         {
-
-                 var book = db.Books.FirstOrDefault(b => b.Title == title);
-
-                 if (book == null)
-                 {
-                     book = db.Books.FirstOrDefault(b => b.Author == author);
-                 }
-
-                 if (book == null)
-                 {
-                     book = new Book { Title = title, Author = author, Amount = amount, Price = price, BookCategory = category };
-                 }
-
-         }
-        */
-
         public static void ChangePrice()
         {
 
@@ -84,7 +65,7 @@ namespace WebbShopIvoNazlic
 
         public static int Login(string username, string password)
         {
-            var user = db.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
+            var user = db.Users.FirstOrDefault(u => u.Name == username && u.Password == password && u.IsActive);
             if (user != null)
             {
                 user.LastLogin = DateTime.Now;
@@ -228,6 +209,89 @@ namespace WebbShopIvoNazlic
 
             return false;
         }
+
+        public static string Ping(int userId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == userId && u.SessionTimer > DateTime.Now.AddMinutes(-15));
+            if (user != null)
+            {
+                return "pong";
+            }
+
+            return string.Empty;
+
+        }
+
+        public static bool Register(string name, string password)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Name == name && u.Password == password);
+            if (user == null)
+            {
+                Console.Write("Please comfirm password: ");
+                string input = Console.ReadLine();
+                if (password == input)
+                {
+                    db.Users.Add(new User { Name = name, Password = password });
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool AddBook(int adminId, string title, string author, int price, int amount)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            var book = db.Books.FirstOrDefault(b => b.Title == title && b.Author == author);
+            if (user != null)
+            {
+                if (book == null)
+                {
+                    db.Books.Add(new Book
+                    {
+                        Title = title,
+                        Author = author,
+                        Amount = amount,
+                        Price = price,
+                    });
+                }
+                else
+                {
+                    book.Amount = amount;
+                    db.Update(book);
+                }
+                db.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool SetAmount(int adminId, int bookId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            var book = db.Books.FirstOrDefault(b => b.Id == bookId);
+            if (user != null && book != null)
+            {
+                Console.Write("Set amount of available books: ");
+                try
+                {
+                    int input = Convert.ToInt32(Console.ReadLine());
+                    book.Amount = input;
+                    db.Update(book);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (System.FormatException)
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+
 
 
     }
