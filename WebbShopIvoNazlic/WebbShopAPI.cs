@@ -291,8 +291,34 @@ namespace WebbShopIvoNazlic
             return false;
         }
 
+        public static List<User> ListUsers(int adminId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            if (user != null)
+            {
+                return db.Users.ToList();
+            }
+            List<User> noData = new List<User>();
+            return noData;
+        }
+
+        public static List<User> FindUser(int adminId, string keyword)
+        {
+            var loggedUser = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            List<User> usersByKeyword = new List<User>();
+
+            if (loggedUser != null)
+            {
+                foreach (var user in db.Users.Where(u => u.Name.ToLower().Contains(keyword.ToLower())))
+                {
+                    usersByKeyword.Add(user);
+                }
+            }
+            return usersByKeyword;
+        }
+
+    
 
 
-
-    }
+}
 }

@@ -25,5 +25,9 @@ namespace WebbShopIvoNazlic.Models
 
         public bool IsAdmin { get; set; } = false;
 
+        public override string ToString()
+        {
+            return $"{Id}: {Name} (Active={IsActive})";
+        }
     }
 }

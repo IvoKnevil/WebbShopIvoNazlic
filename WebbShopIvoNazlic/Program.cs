@@ -116,12 +116,14 @@ namespace WebbShopIvoNazlic
             ///
             ///--------------------------------------------
 
+
             /// Ping - check if user is online (send parameter userId)
             ///------------------------------------------- 
             /// 
             /// Console.WriteLine(WebbShopAPI.Ping());
             /// 
             ///--------------------------------------------           
+
 
             /// Register - create new user (send parameters name & password as strings)
             ///------------------------------------------- 
@@ -130,12 +132,14 @@ namespace WebbShopIvoNazlic
             /// 
             ///--------------------------------------------    
 
+
             /// Add Book - add a book to database(send all the parameters)
             ///------------------------------------------- 
             /// 
             /// Console.WriteLine(WebbShopAPI.AddBook(1, "Pride and Prejudice", "Jane Austen" , 350, 10));
             /// 
             ///--------------------------------------------  
+
 
             /// Set Amount of available books (send parameters userDd and bookId)
             ///------------------------------------------- 
@@ -145,11 +149,34 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------  
 
 
+            /// List all users
+            ///-------------------------------------------
+            ///
+            /// foreach (var item in WebbShopAPI.ListUsers(1))
+            /// {
+            /// Console.WriteLine(item);
+            /// }
+            ///
+            ///--------------------------------------------
+
+
+
+            ///. List all users by keyword
+            ///-------------------------------------------
+            ///
+            /// foreach (var item in WebbShopAPI.FindUser(1, "o"))
+            /// {
+            /// Console.WriteLine(item);
+            /// }
+            ///
+            ///--------------------------------------------
+
+
 
             ///14. Login with Admin user
             ///-------------------------------------------
             ///
-            ///  WebbShopAPI.Login("Administrator", "CodicRulez");
+            //  WebbShopAPI.Login("Administrator", "CodicRulez");
             ///
             ///--------------------------------------------
 
