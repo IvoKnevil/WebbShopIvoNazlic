@@ -42,7 +42,7 @@ namespace WebbShopIvoNazlic.Database
 
                     db.Books.Add(new Book
                     {
-                        Title = "The Shinng",
+                        Title = "The Shining",
                         Author = "Stephen King",
                         Amount = 2,
                         Price = 200,

@@ -259,7 +259,7 @@ namespace WebbShopIvoNazlic
                 else
                 {
                     book.Amount = amount;
-                    db.Update(book);
+                    db.Books.Update(book);
                 }
                 db.SaveChanges();
                 return true;
@@ -279,7 +279,7 @@ namespace WebbShopIvoNazlic
                 {
                     int input = Convert.ToInt32(Console.ReadLine());
                     book.Amount = input;
-                    db.Update(book);
+                    db.Books.Update(book);
                     db.SaveChanges();
                     return true;
                 }
@@ -317,8 +317,77 @@ namespace WebbShopIvoNazlic
             return usersByKeyword;
         }
 
-    
+        public static bool UpdateBook(int adminId, int id, string title, string author, int price)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            var book = db.Books.FirstOrDefault(b => b.Id == id);
 
+            if (user != null)
+            {
+                if (book != null)
+                {
+                    book.Title = title;
+                    book.Author = author;
+                    book.Price = price;
+                    db.Books.Update(book);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            return false;
+        }
 
-}
+        public static bool DeleteBook(int adminId, int bookId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            var book = db.Books.FirstOrDefault(b => b.Id == bookId);
+            if (user != null && book != null)
+            {
+                if (book.Amount > 1)
+                {
+                    book.Amount -= 1;
+                    db.Books.Update(book);
+                }
+                else
+                {
+                    db.Books.Remove(book);
+                }
+                db.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool AddCategory(int adminId, string name)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            var category = db.Books.Include(c => c.BookCategory).Where(c => c.BookCategory.Name == name);
+
+            if (user != null && category != null)
+            {
+                db.BookCategories.Add(new Category { Name = name });
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public static bool AddBookToCategory(int adminId, int bookId, int categoryId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            var book = db.Books.FirstOrDefault(b => b.Id == bookId);
+            var category = db.BookCategories.FirstOrDefault(c => c.Id == categoryId);
+
+            if (user != null && book != null && category != null)
+            {
+                book.BookCategory = category;
+                db.Books.Update(book);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+    }
 }

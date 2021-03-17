@@ -11,7 +11,7 @@ namespace WebbShopIvoNazlic
         static void Main(string[] args)
         {
 
-            ///1. Adding all the mock data to the database
+            /// Add all the mock data to the database
             ///-------------------------------------------
             ///
             ///  MockData.AddData();
@@ -19,7 +19,7 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-            ///2. Login with test user
+            /// Login with test user
             ///-------------------------------------------
             ///
             /// WebbShopAPI.Login("TestCustomer", "Codic2021");
@@ -46,7 +46,7 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-            ///3. List categories containing word "Horror"
+            /// List categories containing word "Horror"
             ///-------------------------------------------
             ///
             /// foreach (var item in WebbShopAPI.GetCategories("horror"))
@@ -57,7 +57,7 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-            ///4. List all books in category (by id) - (Enter chosen category id))
+            /// List all books in category (by id) - (Enter chosen category id))
             ///-------------------------------------------
             ///
             /// foreach (var item in WebbShopAPI.GetCategory())
@@ -68,7 +68,7 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-            ///5. Show detalis for book (Enter chosen book id)
+            /// Show detalis for book (Enter chosen book id)
             ///-------------------------------------------
             ///
             /// Console.WriteLine(WebbShopAPI.GetBook());
@@ -98,7 +98,7 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-            ///6. List all available books of certain category (by id) - (enter chosen category id)
+            /// List all available books of certain category (by id) - (enter chosen category id)
             ///-------------------------------------------
             ///
             /// foreach (var item in WebbShopAPI.GetAvailableBooks())
@@ -109,7 +109,7 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-            ///7. Buy Book (send parameters userId and bookId)
+            /// Buy Book (send parameters userId and bookId)
             ///-------------------------------------------
             /// 
             /// Console.WriteLine(WebbShopAPI.BuyBook(2, 1)); 
@@ -160,8 +160,7 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-
-            ///. List all users by keyword
+            /// List all users by keyword
             ///-------------------------------------------
             ///
             /// foreach (var item in WebbShopAPI.FindUser(1, "o"))
@@ -172,11 +171,43 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
+            /// Update Book - update book data
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.UpdateBook(1, 3, "Testing testing", "Madeup Author" , 350));
+            /// 
+            ///--------------------------------------------  
 
-            ///14. Login with Admin user
+
+            /// Delete Book - Reduce amount by one, delete when amount is zero
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.DeleteBook(1, 3));
+            /// 
+            ///--------------------------------------------  
+
+
+            /// Add Category
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.AddCategory(1, "Drama"));
+            /// 
+            ///--------------------------------------------  
+
+
+            /// Add Book to category
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.AddBookToCategory(1, 5, 5));
+            /// 
+            ///--------------------------------------------  
+            ///
+
+
+            /// Login with Admin user
             ///-------------------------------------------
             ///
-            //  WebbShopAPI.Login("Administrator", "CodicRulez");
+            ///  WebbShopAPI.Login("Administrator", "CodicRulez");
             ///
             ///--------------------------------------------
 
