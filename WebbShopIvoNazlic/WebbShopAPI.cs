@@ -11,57 +11,7 @@ namespace WebbShopIvoNazlic
     public static class WebbShopAPI
     {
 
-
         private static BookDatabase db = new BookDatabase();
-
-        public static void ChangePrice()
-        {
-
-            using (var db = new BookDatabase())
-            {
-                var cabal = db.Books.FirstOrDefault(b => b.Title == "Cabal (Nightbreed)");
-
-                if (cabal != null)
-
-                {
-                    cabal.Price = 300;
-                }
-
-                db.Update(cabal);
-                db.SaveChanges();
-
-            }
-        }
-
-        public static void RemoveBook()
-        {
-
-            using (var db = new BookDatabase())
-            {
-                var cabal = db.Books.FirstOrDefault(b => b.Title == "Cabal (Nightbreed)");
-
-                if (cabal != null)
-
-                {
-                    db.Books.Remove(cabal);
-                }
-
-                db.SaveChanges();
-
-            }
-        }
-
-        public static void SortByName()
-        {
-            using (var db = new BookDatabase())
-            {
-                foreach (var book in db.Books.OrderBy(b => b.Title))
-                {
-                    Console.WriteLine(book);
-                }
-            }
-
-        }
 
         public static int Login(string username, string password)
         {
@@ -362,9 +312,9 @@ namespace WebbShopIvoNazlic
         public static bool AddCategory(int adminId, string name)
         {
             var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
-            var category = db.Books.Include(c => c.BookCategory).Where(c => c.BookCategory.Name == name);
+            var category = db.BookCategories.FirstOrDefault(c => c.Name == name);
 
-            if (user != null && category != null)
+            if (user != null && category == null)
             {
                 db.BookCategories.Add(new Category { Name = name });
                 db.SaveChanges();
@@ -386,6 +336,54 @@ namespace WebbShopIvoNazlic
                 db.SaveChanges();
                 return true;
             }
+            return false;
+        }
+
+        public static bool UpdateCategory(int adminId, int categoryId, string name)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            var category = db.BookCategories.FirstOrDefault(c => c.Id == categoryId);
+
+            if (user != null && category != null)
+            {
+                category.Name = name;
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public static bool DeleteCategory(int adminId, int categoryId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            var category = db.BookCategories.FirstOrDefault(c => c.Id == categoryId);
+
+            if (user != null && category != null && GetCategory(category.Id).Count == 0)
+            {
+                db.BookCategories.Remove(category);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public static bool AddUser(int adminId, string name, string password)
+        {
+            if (String.IsNullOrEmpty(password))
+            {
+                return false;
+            }
+
+            var loggedUser = db.Users.FirstOrDefault(u => u.Id == adminId && u.SessionTimer > DateTime.Now.AddMinutes(-15) && u.IsAdmin);
+            var user = db.Users.FirstOrDefault(u => u.Name == name);
+
+            if (loggedUser != null && user == null)
+            {
+                    db.Users.Add(new User { Name = name, Password = password });
+                    db.SaveChanges();
+                    return true;
+            }
+
             return false;
         }
 

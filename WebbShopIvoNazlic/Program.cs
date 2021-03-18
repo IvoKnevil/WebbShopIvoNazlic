@@ -190,7 +190,7 @@ namespace WebbShopIvoNazlic
             /// Add Category
             ///------------------------------------------- 
             /// 
-            /// Console.WriteLine(WebbShopAPI.AddCategory(1, "Drama"));
+            /// Console.WriteLine(WebbShopAPI.AddCategory(1, "Biography"));
             /// 
             ///--------------------------------------------  
 
@@ -204,6 +204,32 @@ namespace WebbShopIvoNazlic
             ///
 
 
+            /// Update category
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.UpdateCategory(1, 5, "Romance"));
+            /// 
+            ///--------------------------------------------  
+            ///
+
+
+            /// Delete Category if no book is linked to it
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.DeleteCategory(1, 5));
+            /// 
+            ///--------------------------------------------  
+
+
+
+            /// Add user - create new user if user doesnt exist and password is not ""
+            ///------------------------------------------- 
+            /// 
+            /// Console.WriteLine(WebbShopAPI.AddUser(1, "Pest", "Kolera"));
+            /// 
+            ///--------------------------------------------    
+
+
             /// Login with Admin user
             ///-------------------------------------------
             ///
@@ -212,23 +238,7 @@ namespace WebbShopIvoNazlic
             ///--------------------------------------------
 
 
-
-
-
-            //Console.WriteLine(WebbShopAPI.Login("Administrator", "CodicRulez"));
-            //WebbShopAPI.Logout(1);
-
-
-            //AddMockData();
-            //WebbShopAPI WebShop = new WebbShopAPI();
-
-            //AddBook("Ivos Book", "Moi", 1500, 1, category(Horror));
-            //SortByName();
-            //ChangePrice();
-            //RemoveBook();
-
         }
-
 
 
     }
