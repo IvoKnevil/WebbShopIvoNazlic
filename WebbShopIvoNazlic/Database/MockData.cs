@@ -3,9 +3,15 @@ using WebbShopIvoNazlic.Models;
 
 namespace WebbShopIvoNazlic.Database
 {
+
+    /// <remarks>
+    /// Handles mock data to be added to the database
+    /// </remarks>
     public static class MockData
     {
-
+        /// <summary>
+        /// Adds mock data to the database
+        /// </summary>
         public static void AddData()
         {
             using (var db = new BookDatabase())
@@ -67,13 +73,9 @@ namespace WebbShopIvoNazlic.Database
                         BookCategory = db.BookCategories.FirstOrDefault(c => c.Name == "Science Fiction")
                     });
                     db.SaveChanges();
-
                 }
-
             }
-
         }
-
-
+    
     }
 }

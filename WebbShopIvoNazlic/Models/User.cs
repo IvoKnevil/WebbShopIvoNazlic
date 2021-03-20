@@ -3,14 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebbShopIvoNazlic.Models
 {
+    /// <remarks>
+    /// Users table
+    /// </remarks>
     public class User
     {
-        /// <summary>
-        /// Class for users table
-        /// </summary>
-        
         [Key]
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -29,5 +27,6 @@ namespace WebbShopIvoNazlic.Models
         {
             return $"{Id}: {Name} (Active={IsActive})";
         }
+
     }
 }

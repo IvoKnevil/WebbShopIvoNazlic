@@ -3,14 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebbShopIvoNazlic.Models
 {
+    /// <remarks>
+    /// Books table
+    /// </remarks>
     public class Book
     {
-        /// <summary>
-        /// Class for books in table Books
-        /// </summary>
-        
         [Key]
-
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -21,7 +19,7 @@ namespace WebbShopIvoNazlic.Models
 
         public int Amount { get; set; }
 
-        [ForeignKey ("CategoryId")]
+        [ForeignKey("CategoryId")]
         public Category BookCategory { get; set; }
 
         public override string ToString()

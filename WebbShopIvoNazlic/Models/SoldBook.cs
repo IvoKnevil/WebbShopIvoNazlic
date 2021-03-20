@@ -4,14 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebbShopIvoNazlic.Models
 {
+    /// <remarks>
+    /// Sold books table
+    /// </remarks>
     public class SoldBook
     {
-        /// <summary>
-        /// Class for sold books table
-        /// </summary>
-        
-        [Key]
 
+        [Key]
         public int Id { get; set; }
 
         public string Title { get; set; }

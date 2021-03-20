@@ -10,8 +10,8 @@ using WebbShopIvoNazlic.Database;
 namespace WebbShopIvoNazlic.Migrations
 {
     [DbContext(typeof(BookDatabase))]
-    [Migration("20210314213621_initialiseDb")]
-    partial class initialiseDb
+    [Migration("20210320191423_initialize_db")]
+    partial class initialize_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
