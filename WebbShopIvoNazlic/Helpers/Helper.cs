@@ -111,6 +111,21 @@ namespace WebbShopIvoNazlic.Helpers
         }
 
         /// <summary>
+        /// Checks if user exists
+        /// </summary>
+        /// <returns>user object</returns>
+        public static User UserExists(int userId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == userId);
+            if (user != null)
+            {
+                return user;
+            }
+
+            return user;
+        }
+
+        /// <summary>
         /// Checks if user exists and is logged in
         /// </summary>
         /// <returns>user object</returns>

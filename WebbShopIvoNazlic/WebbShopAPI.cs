@@ -538,23 +538,96 @@ namespace WebbShopIvoNazlic
             return 0;
         }
 
-
         /// <summary>
-        /// Sums all sold books
+        /// Checks the Id of the customer who bought most books
         /// </summary>
-        /// <returns>Sum of all sold books</returns>
-        public static void BestCustomer(int adminId)
+        /// <returns>Customer Id</returns>
+        public static int BestCustomer(int adminId)
         {
             var user = Helper.IsAdminAndLoggedIn(adminId);
-            List<int> bestCustomer = new List<int>();
-            if (user != null && db.SoldBooks.Count() > 0)
+            var bestCustomer = db.SoldBooks.Include(u=> u.Users).AsEnumerable().GroupBy(u => u.Users.Id).OrderByDescending(u => u.Count()).FirstOrDefault();
+            if (user != null && bestCustomer != null)
             {
-                foreach (var soldBook in db.SoldBooks)
-                {
-                    bestCustomer.Add(soldBook.Users.Id);
-                }
+                return bestCustomer.Key;
             }
-            Console.WriteLine(bestCustomer);
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Promotes user to admin (if user exists)
+        /// </summary>
+        /// <returns>True if method success, otherwise false</returns>
+        public static bool Promote(int adminId, int userId)
+        {
+            var adminUser = Helper.IsAdminAndLoggedIn(adminId);
+            var user = Helper.UserExists(userId);
+            if (adminUser != null && user != null)
+            {
+                user.IsAdmin = true;
+                db.Users.Update(user);
+                db.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Demotes admin to user (if user exists)
+        /// </summary>
+        /// <returns>True if method success, otherwise false</returns>
+        public static bool Demote(int adminId, int userId)
+        {
+            var adminUser = Helper.IsAdminAndLoggedIn(adminId);
+            var user = Helper.UserExists(userId);
+            if (adminUser != null && user != null)
+            {
+                user.IsAdmin = false;
+                db.Users.Update(user);
+                db.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Activates an user (if user exists)
+        /// </summary>
+        /// <returns>True if method success, otherwise false</returns>
+        public static bool ActivateUser(int adminId, int userId)
+        {
+            var adminUser = Helper.IsAdminAndLoggedIn(adminId);
+            var user = Helper.UserExists(userId);
+            if (adminUser != null && user != null)
+            {
+                user.IsActive = true;
+                db.Users.Update(user);
+                db.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Deactivates an user (if user exists)
+        /// </summary>
+        /// <returns>True if method success, otherwise false</returns>
+        public static bool InactivateUser(int adminId, int userId)
+        {
+            var adminUser = Helper.IsAdminAndLoggedIn(adminId);
+            var user = Helper.UserExists(userId);
+            if (adminUser != null && user != null)
+            {
+                user.IsActive = false;
+                db.Users.Update(user);
+                db.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
 
 

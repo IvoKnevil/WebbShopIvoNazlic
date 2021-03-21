@@ -63,7 +63,7 @@ namespace WebbShopIvoNazlic
 
 
 
-            // Console.WriteLine(WebbShopAPI.BuyBook(2, 1)); 
+            // Console.WriteLine(WebbShopAPI.BuyBook(2, 5)); 
 
 
 
@@ -132,10 +132,22 @@ namespace WebbShopIvoNazlic
             //  }
 
 
-            Console.WriteLine(WebbShopAPI.MoneyEarned(1));
+            // Console.WriteLine(WebbShopAPI.MoneyEarned(1));
 
 
-            WebbShopAPI.BestCustomer(1);
+            // Console.WriteLine(WebbShopAPI.BestCustomer(1));
+
+
+            //Console.WriteLine(WebbShopAPI.Promote(1, 3));
+
+
+            //Console.WriteLine(WebbShopAPI.Demote(1, 3));
+
+
+            //Console.WriteLine(WebbShopAPI.ActivateUser(1, 5));
+
+
+            //Console.WriteLine(WebbShopAPI.InactivateUser(1, 3));
 
         }
     }
