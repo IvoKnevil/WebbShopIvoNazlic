@@ -63,7 +63,7 @@ namespace WebbShopIvoNazlic
 
 
 
-            // Console.WriteLine(WebbShopAPI.BuyBook(2, 2)); 
+            // Console.WriteLine(WebbShopAPI.BuyBook(2, 1)); 
 
 
 
@@ -125,6 +125,17 @@ namespace WebbShopIvoNazlic
             // Console.WriteLine(WebbShopAPI.AddUser(1, "Pest", "Kolera"));
 
 
+
+            //  foreach (var item in WebbShopAPI.SoldItems(1))
+            //  {
+            //     Console.WriteLine(item);
+            //  }
+
+
+            Console.WriteLine(WebbShopAPI.MoneyEarned(1));
+
+
+            WebbShopAPI.BestCustomer(1);
 
         }
     }

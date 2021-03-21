@@ -23,7 +23,7 @@ namespace WebbShopIvoNazlic
         /// <returns>Sser id if success, 0 if fail</returns>
         public static int Login(string username, string password)
         {
-            var user = db.Users.FirstOrDefault(u=> u.Name == username && u.Password == password && u.IsActive == true);
+            var user = db.Users.FirstOrDefault(u => u.Name == username && u.Password == password && u.IsActive == true);
             if (user != null)
             {
                 user.LastLogin = DateTime.Now;
@@ -213,8 +213,8 @@ namespace WebbShopIvoNazlic
                         CategoryId = book.BookCategory.Name,
                         Price = book.Price,
                         PurchasedDate = DateTime.Now,
-                        Users = db.Users.FirstOrDefault(u=> u.Id == userId)
-                        
+                        Users = db.Users.FirstOrDefault(u => u.Id == userId)
+
                     });
                     db.SaveChanges();
                     return true;
@@ -483,7 +483,7 @@ namespace WebbShopIvoNazlic
 
             return false;
         }
-        
+
         /// <summary>
         /// Adds user to the database if user doesnt exist and password !=""
         /// </summary>
@@ -506,6 +506,57 @@ namespace WebbShopIvoNazlic
 
             return false;
         }
+
+        /// <summary>
+        /// Lists all sold books
+        /// </summary>
+        /// <returns>List of all sold books</returns>
+        public static List<SoldBook> SoldItems(int adminId)
+        {
+            var user = Helper.IsAdminAndLoggedIn(adminId);
+            if (user != null)
+            {
+                return db.SoldBooks.ToList();
+            }
+
+            List<SoldBook> noData = new List<SoldBook>();
+            return noData;
+        }
+
+        /// <summary>
+        /// Sums all sold books
+        /// </summary>
+        /// <returns>Sum of all sold books</returns>
+        public static int MoneyEarned(int adminId)
+        {
+            var user = Helper.IsAdminAndLoggedIn(adminId);
+            if (user != null)
+            {
+                return db.SoldBooks.Select(s => s.Price).Sum();
+            }
+
+            return 0;
+        }
+
+
+        /// <summary>
+        /// Sums all sold books
+        /// </summary>
+        /// <returns>Sum of all sold books</returns>
+        public static void BestCustomer(int adminId)
+        {
+            var user = Helper.IsAdminAndLoggedIn(adminId);
+            List<int> bestCustomer = new List<int>();
+            if (user != null && db.SoldBooks.Count() > 0)
+            {
+                foreach (var soldBook in db.SoldBooks)
+                {
+                    bestCustomer.Add(soldBook.Users.Id);
+                }
+            }
+            Console.WriteLine(bestCustomer);
+        }
+
 
     }
 }
