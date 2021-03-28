@@ -41,7 +41,8 @@ namespace WebbShopIvoNazlic
         /// </summary>
         public static void Logout(int userId)
         {
-            var user = Helper.UserExistsAndLoggedIn(userId);
+            var user = db.Users.FirstOrDefault(u => u.Id == userId);
+            //var user = Helper.UserExistsAndLoggedIn(userId);
             if (user != null)
             {
                 user.SessionTimer = DateTime.MinValue;
@@ -219,6 +220,7 @@ namespace WebbShopIvoNazlic
                     db.SaveChanges();
                     return true;
                 }
+                return false;
             }
 
             return false;
@@ -257,6 +259,8 @@ namespace WebbShopIvoNazlic
                     db.SaveChanges();
                     return true;
                 }
+
+                return false;
             }
 
             return false;
@@ -630,6 +634,20 @@ namespace WebbShopIvoNazlic
             return false;
         }
 
+        /// <summary>
+        /// API-method to check if user is admin
+        /// </summary>
+        /// <returns>True if admin, otherwise false</returns>
+        public static bool IsAdmin(int userId)
+        {
+            var user = db.Users.FirstOrDefault(u => u.Id == userId && u.IsAdmin);
+            if (user != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
     }
 }
